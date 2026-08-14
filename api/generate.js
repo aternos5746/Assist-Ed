@@ -35,7 +35,13 @@ async function callGroq(apiKey, messages) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({ model: MODEL, messages, max_tokens: 1024 }),
+      body: JSON.stringify({
+  model: MODEL,
+  messages,
+  max_tokens: 1024,
+  reasoning_format: "hidden", // Qwen 3.6 is a "thinking" model — without this, its
+  // internal <think>...</think> reasoning leaks into the visible output.
+}),
     });
     const data = await groqRes.json();
 
