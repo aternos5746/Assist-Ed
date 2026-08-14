@@ -39,8 +39,10 @@ async function callGroq(apiKey, messages) {
   model: MODEL,
   messages,
   max_tokens: 1024,
-  reasoning_format: "hidden", // Qwen 3.6 is a "thinking" model — without this, its
-  // internal <think>...</think> reasoning leaks into the visible output.
+  reasoning_effort: "none", // Turns off Qwen 3.6's thinking mode entirely.
+  // Hiding the reasoning (reasoning_format: "hidden") wasn't enough — the model
+  // was still spending the whole token budget thinking, leaving nothing for
+  // the actual answer. This skips thinking altogether.
 }),
     });
     const data = await groqRes.json();
