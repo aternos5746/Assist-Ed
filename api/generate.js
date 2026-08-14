@@ -6,7 +6,7 @@
 // { content: [{ type: "text", text }] } shape the frontend already expects —
 // so PrepPeriod.jsx doesn't need to know which provider is behind this.
 
-const MODEL = "gemini-2.5-flash";
+const MODEL = "gemini-2.5-flash-lite";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
